@@ -86,31 +86,43 @@ public:
     }
 };
 
+void deleteList(ListNode* head) {
+    while (head != nullptr) {
+        ListNode* temp = head;
+        head = head->next;
+        delete temp;
+    }
+}
+
 int main() {
-    // Creating first linked list: 2 -> 4 -> 3 -> 7 -> 1 (represents 17342)
+    // Creating first linked list: 2 -> 4 -> 3 -> 7 -> 1
     ListNode* list1 = new ListNode(2);
     list1->next = new ListNode(4);
     list1->next->next = new ListNode(3);
     list1->next->next->next = new ListNode(7);
     list1->next->next->next->next = new ListNode(1);
 
-    // Creating second linked list: 5 -> 6 -> 4 -> 8 -> 9 (represents 98465)
+    // Creating second linked list: 5 -> 6 -> 4 -> 8 -> 9
     ListNode* list2 = new ListNode(5);
     list2->next = new ListNode(6);
     list2->next->next = new ListNode(4);
     list2->next->next->next = new ListNode(8);
     list2->next->next->next->next = new ListNode(9);
 
-    // Optional: call addTwoNumbers to test it
     Solution solution;
     ListNode* result = solution.addTwoNumbers(list1, list2);
 
-    // Print the resulting list (currently only prints first node value)
     while (result != nullptr) {
         std::cout << result->val << " ";
         result = result->next;
     }
     std::cout << std::endl;
+
+    // Reset pointer to start of result before deleting
+    result = solution.addTwoNumbers(list1, list2); // or store the original result separately
+    deleteList(list1);
+    deleteList(list2);
+    deleteList(result);
 
     return 0;
 }
